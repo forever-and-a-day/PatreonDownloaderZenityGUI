@@ -1,0 +1,45 @@
+#!/bin/bash
+creatorOption=$(zenity --list --title="Patreon Downloader" --column="Creator" --column="Creator URL" Snailords "https://www.patreon.com/Snailords/posts" \
+Refrainbow "https://www.patreon.com/refrainbow/posts" \
+Other "Input URL Manually")
+if [[ $creatorOption = "Snailords" ]]
+then
+  echo "Snailords Command"
+  zenity --info --title="Downoad Started" --text="Patreon downloader has started to save content from $creatorOption, you will be notified when it's complete." --no-wrap
+  ./PatreonDownloader.App --descriptions --embeds --json --campaign-images --url https://www.patreon.com/Snailords/posts
+  notify-send "Patreon Downloader" "Download complete: $creatorOption"
+elif [[ $creatorOption = "Refrainbow" ]]
+then
+  echo "Refrainbow Command"
+  zenity --info --title="Downoad Started" --text="Patreon downloader has started to save content from $creatorOption, you will be notified when it's complete." --no-wrap
+  ./PatreonDownloader.App --descriptions --embeds --json --campaign-images --url https://www.patreon.com/Snailords/posts
+  notify-send "Patreon Downloader" "Download complete: $creatorOption"
+elif [[ $creatorOption = "Other" ]]
+then
+    # Manual Option
+    
+    customUrl=$(zenity --entry --text="Enter the URL ending in ''/posts'':" --title="Enter Creator URL")
+    if [ -n "$customUrl" ]
+    then
+        #Run downloader and check for valid/invalid url
+        downloadIsSuccessCheck=$(./PatreonDownloader.App --descriptions --embeds --json --campaign-images --url $customUrl)
+        if $downloadIsSuccessCheck | grep -r 'Download url should start with'; then
+            echo "fail"
+            zenity --error --title="Error" --text="Unable to proceed - Invalid Patreon URL" --no-wrap
+        elif $downloadIsSuccessCheck | grep -r 'INFO Finished'; then
+            echo "succeed"
+            notify-send "Patreon Downloader" "Download complete: $creatorOption"
+            
+        else
+            echo "wtf is happening? The variable is set to this: $downloadIsSuccessCheck"
+            zenity --error --title="Error" --text="This script's logic encountered an error and can't continue." --no-wrap
+        fi
+        #end 
+    fi
+    
+  #end manual option
+else
+  echo "Other Command No Input"
+  zenity --info --title="Notice" --text="The script completed without downloading anything." --no-wrap
+fi
+echo "Done"
