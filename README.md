@@ -4,13 +4,15 @@ Designed to be a quick and dirty frontend for [PatreonDownloader](https://github
 Thought I could do it in an hour, that was a lie given my small knowledge of bash scripting haha
 It's my first real script I've made that actually does something I want (kinda) and I'm proud of it, plz don't laugh
 
+![Screenshot](https://files.catbox.moe/it4pyc.png)
+
 ## Features 
 * Downloads content from 2 hardcoded preset creators that I like
 * Currently set to download absolutely everything, nice™
 * Is supposed to accept custom creator URLS, does not fully work (downloads but reports invalid URL every time)
 * Gives you a nice lil notification when it's done (only works for presets atm, tested on Cinnamon DE but should work with anything gnome-like)
 * Prints "Done" in the terminal when it's done, like a good boy
-* Don't copy and paste commands with included urls from a text file and watch the script run in the terminal like a caveman - just double click, hit run, you're done (not quite but it rhymes) 
+* Archiving patreon posts not user-friendly or fast enough? Don't copy and paste commands with included urls from a text file and watch the script run in the terminal like a caveman - just double click, hit run, you're done (not quite but it rhymes) 
 * I spent 5 hours automating a task that usually takes 8 min at most, and it's still broken
 * I love you and you have worth <3
 * This bash script loves you too <3
