@@ -21,22 +21,30 @@ then
     customUrl=$(zenity --entry --text="Enter the URL ending in ''/posts'':" --title="Enter Creator URL")
     if [ -n "$customUrl" ]
     then
-        #Run downloader and check for valid/invalid url
+        zenity --info --title="Downoad Started" --text="Patreon downloader has started to save content from the specified creator, you will be notified when it's complete." --no-wrap
         downloadIsSuccessCheck=$(./PatreonDownloader.App --descriptions --embeds --json --campaign-images --url $customUrl)
-        if $downloadIsSuccessCheck | grep -r 'Download url should start with'; then
-            echo "fail"
-            zenity --error --title="Error" --text="Unable to proceed - Invalid Patreon URL" --no-wrap
-        elif $downloadIsSuccessCheck | grep -r 'INFO Finished'; then
-            echo "succeed"
-            notify-send "Patreon Downloader" "Download complete: $creatorOption"
-            
-        else
-            echo "wtf is happening? The variable is set to this: $downloadIsSuccessCheck"
-            zenity --error --title="Error" --text="This script's logic encountered an error and can't continue." --no-wrap
+        downloadIsFailUrl=$(echo $downloadIsSuccessCheck | grep -i -o 'Download url should start with')
+        downloadIsFinish=$(echo $downloadIsSuccessCheck | grep -i -o 'INFO Finished')       
+        echo "downloadIsFailUrl is $downloadIsFailUrl ..." #debug
+        echo "downloadIsFinish is $downloadIsFinish ..." #debug
+        # Checking for download fail - reason of invalid patreon URL
+            if [[ -z "$downloadIsFailUrl" ]] #If var is empty, true
+                then
+                    echo "empty fail var - proceeding..."
+                elif [[ $downloadIsFailUrl = "Download url should start with" ]]
+                    then
+                        echo "Fail Error Case - Invalid URL"
+                        zenity --error --title="Error" --text="Unable to proceed - Invalid Patreon URL" --no-wrap
+                elif [[ $downloadIsFinish = "INFO Finished" ]]
+                    then
+                        notify-send "Patreon Downloader" "Custom download complete"
+                else
+                    echo "script error - debug in command line"
+                    echo "The variable downloadIsFailUrl is $downloadIsFailUrl ..."
+                    echo "The variable downloadIsSuccessCheck is $downloadIsSuccessCheck ..."
+                    zenity --error --title="Error" --text="Unexpected Error! - Please re-run the script in terminal and file a github issue with the output." --no-wrap
         fi
-        #end 
-    fi
-    
+    fi  
   #end manual option
 else
   echo "Other Command No Input"
