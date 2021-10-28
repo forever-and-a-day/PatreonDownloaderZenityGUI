@@ -7,7 +7,7 @@ It's my first real script I've made that actually does something usefull to me a
 ![Screenshot](https://files.catbox.moe/it4pyc.png)
 
 ## Features 
-* Downloads content from 2 hardcoded preset creators that I like
+* Downloads content from 3 hardcoded preset creators that I like
 * Currently set to download absolutely everything, nice™
 * Accepts custom creator URLS
 * Gives you a nice lil notification when it's done (only works for presets atm?, tested on Cinnamon DE but should work with anything gnome-like)
