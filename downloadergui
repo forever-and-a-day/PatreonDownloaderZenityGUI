@@ -1,6 +1,7 @@
 #!/bin/bash
 creatorOption=$(zenity --list --title="Patreon Downloader" --column="Creator" --column="Creator URL" Snailords "https://www.patreon.com/Snailords/posts" \
 Refrainbow "https://www.patreon.com/refrainbow/posts" \
+Telepurte "https://www.patreon.com/m/2235165/posts" \
 Other "Input URL Manually")
 if [[ $creatorOption = "Snailords" ]]
 then
@@ -13,6 +14,12 @@ then
   echo "Refrainbow Command"
   zenity --info --title="Downoad Started" --text="Patreon downloader has started to save content from $creatorOption, you will be notified when it's complete." --no-wrap
   ./PatreonDownloader.App --descriptions --embeds --json --campaign-images --url https://www.patreon.com/Snailords/posts
+  notify-send "Patreon Downloader" "Download complete: $creatorOption"
+elif [[ $creatorOption = "Telepurte" ]]
+then
+  echo "Telepurte Command"
+  zenity --info --title="Downoad Started" --text="Patreon downloader has started to save content from $creatorOption, you will be notified when it's complete." --no-wrap
+  ./PatreonDownloader.App --descriptions --embeds --json --campaign-images --url https://www.patreon.com/m/2235165/posts
   notify-send "Patreon Downloader" "Download complete: $creatorOption"
 elif [[ $creatorOption = "Other" ]]
 then
