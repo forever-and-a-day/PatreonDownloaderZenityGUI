@@ -37,5 +37,7 @@ Change hardcoded download commands to specify location (idk how too lazy) or cre
 **"The weird Chrome window closed before I could sign in! What do?"**
 Re-run and try again. PatreonDownloader is wonky and will snap its jaws shut on the sign in browser real quick, but once you're real quick-er than it and manage to sign in, you won't have to do that again unless you change your password, in which case I recommend backing up your downloads elsewhere, deleting the patreondownloader install folder, and getting a new one from it's github repo. Also try deleting any strange new profiles that appear in chrome profile switcher before running a fresh install. 
 
+Still having trouble? [See this workaround](https://github.com/forever-and-a-day/PatreonDownloaderZenityGUI/tree/main/docs/chrome-close-fix.md).
+
 **"The downloader GUI doesn't send me a notification when I try to use the custom url download feature. Help!"**
 I'm working on this one - don't fret though, it still downloads (I think..., double check just in case). As a temporary workaround, consider adding your desired creator's url to an additional preset by modifying or copying my hardcoded presets. 
